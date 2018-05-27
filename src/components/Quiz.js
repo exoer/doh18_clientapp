@@ -10,6 +10,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import {green} from '@material-ui/core/colors';
 
 const data = [
   {
@@ -17,9 +18,13 @@ const data = [
     answers: ['Not open any email from any strangers', 'Open the email, but not open any lnks', 'Open the email, but look on the url if it looks legitimate'],
     correct: 2
   },
-  {question: "Which of these links in email looks unsafe?",
-  answers: ['http://google.com/inbox/asdfkaerea/', 'https://google.com/inbox/me/2311asaf'],
-  correct: 1
+  {
+    question: "Which of these links in email looks unsafe?",
+    answers: [
+      'https://google.com/inbox/me/2311asaf',
+      'http://google.com/inbox/asdfkaerea/',
+    ],
+  correct: 0
   }
 ];
 
@@ -65,7 +70,7 @@ class Question extends React.Component {
         }
         </RadioGroup>
         {this.state.correct &&
-          <div>correct</div>
+          <div style={{color: green[500]}}>Correct</div>
         }
       </Grid>
     );
@@ -102,8 +107,8 @@ class Quiz extends React.Component {
   render() {
     return (
       <Grid container spacing={24}>
-        <Typography paragraph>
-          Your file has been encrypted. To unlock your files you must answer the
+        <Typography variant='subheading' paragraph>
+          Your files has been encrypted. To unlock your files you must answer the
           tutorial on ransomware questions correctly.
         </Typography>
         {data.map((x, i) => {
