@@ -10,35 +10,49 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import {green} from '@material-ui/core/colors';
+import {green,red} from '@material-ui/core/colors';
 import logo from '../img/aware.png'
 
 const data = [
   {
-    question: "1. Alexander just received an email from a John More, a name that he don't know. What should he do?",
-    answers: ['Not open any email from any strangers', 'Open the email, but not open any lnks', 'Open the email, but look on the url if it looks legitimate'],
-    correct: 2
+    question: 'What went wrong?',
+    answers: ["The email address of the sender wasn't correct","I felt for clickbait",  "I shouln't ever open attachments sent by mail",],
+    correct: 1,
+    comments: ["Be cautios of misspelled email adress.","When a title sounds too good to be true it usually is", "Be careful about attachments from unknown senders, but from known contacts it is usually safe."]
   },
   {
-    question: "2. Which of these links in email looks most un-safe",
-    answers: [
-      'http://google.com/inbox/asdfkaerea/',
-      'https://google.com/inbox/me/2311asaf',
-    ],
-    correct: 0
+    question: 'When a Nigerian princess is willing to transfer $1 million to your safe European account, but first you have to transfer $1000. Would you go for it?',
+    answers: [ "Sounds like an awesome deal!", "I guess this would be a scam?"],
+    correct: 1,
+    comments: ["A classical scam. When a deal sounds too good to be true be careful. Especially when you have to pay to get money", "Good choice"]
   }
+  // {
+  //   question: "Q 1. Alexander just received an email from a John More, a name that he don't know. What should he do?",
+  //   answers: ["Don't open any email from any strangers", 'Open the email, but not open any lnks', 'Open the email, but look on the url if it looks legitimate'],
+  //   correct: 2
+  // },
+  // {
+  //   question: "Q 2. Which of these links in email looks most un-safe",
+  //   answers: [
+  //     'http://google.com/inbox/asdfkaerea/',
+  //     'https://google.com/inbox/me/2311asaf',
+  //   ],
+  //   correct: 0
+  // }
 ];
 
 class Question extends React.Component {
   state = {
     value: null,
-    correct: false
+    correct: false,
+    idx: null,
   }
 
   handleChange = event => {
     const item = this.props.item;
-    const corr = item.answers.indexOf(event.target.value) === item.correct
-    this.setState({ value: event.target.value, correct: corr }, ()=>{
+    const idx = item.answers.indexOf(event.target.value)
+    const corr = idx === item.correct
+    this.setState({ value: event.target.value, correct: corr, idx: idx }, ()=>{
       this.props.onChange(corr)
     });
   };
@@ -46,12 +60,14 @@ class Question extends React.Component {
   render() {
     const {
       question,
-      answers
+      answers,
+      comments,
     } = this.props.item;
+    // console.log('lll', this.state)
     const color = this.state.correct ? 'primary' : 'secondary'
     return (
-      <Grid item xs={12} sm={12}>
-        <Typography variant='title'  gutterBottom align='left'>
+      <Grid item xs={12} sm={12} style={{marginBottom: 40}}>
+        <Typography variant='subheading'  gutterBottom align='left'>
           {question}
         </Typography>
         <RadioGroup
@@ -65,13 +81,21 @@ class Question extends React.Component {
 
 
         {answers.map(x => {
-          return <FormControlLabel  color={color} value={x} control={<Radio />} label={x} />
+          return (
+            <FormControlLabel  color={color} value={x} control={<Radio />} label={x} />
+            )
           }
         )
         }
         </RadioGroup>
         {this.state.correct &&
-          <div style={{color: green[500]}}>Correct</div>
+          <Typography style={{color: green[500]}}>Correct</Typography>
+        }
+        {this.state.value && !this.state.correct &&
+          <Typography style={{color: red[500]}}>Wrong</Typography>
+        }
+        {this.state.idx &&
+          <Typography>{comments[this.state.idx]}</Typography>
         }
       </Grid>
     );
@@ -108,9 +132,9 @@ class Quiz extends React.Component {
   render() {
     return (
       <div>
-        <div style={{display: 'flex'}}>
-          <Typography variant='display1' paragraph>
-            Your files has been encrypted. To unlock your files you must answer the
+        <div style={{display: 'flex', marginTop: 40, marginBottom: 40, marginLeft: 40, marginRight: 40}}>
+          <Typography variant='subheading' paragraph  align='center' className='myfont'>
+            Your files has been <strong>encrypted</strong>. To unlock your files you must answer the
             tutorial on ransomware questions correctly.
           </Typography>
           {

@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Quiz from './components/Quiz'
 import logo from './img/aware2.png'
 import meme from './img/meme_1.jpg'
+import 'typeface-roboto'
+// import 'roboto/roboto-fontface.css'
 // import {Link} from 'react-router-dom'
 
 class App extends Component {
