@@ -32,19 +32,7 @@ class App extends Component {
           <img src={meme} className='center' />
         </div>
         <div>
-        <Typography variant='title' style={{marginBottom: 40}}>
-        Oh no! You could have set your company in danger by clicking on this email.<br />
-<br />
-You’re not alone - around 80 000 people fall victim to phishing scams every day globally.<br />
-<br />
-Take a closer look at the email address this file was sent from - it had your co-workers name misspelled. This is a common phishing scheme where employees are allured to download malware into their computer.<br />
-<br />
-This malware can encrypt your files. When you open the presentation file in your computer, you can see what encryption looks like.<br />
-<br />
-We want to make sure you’re protected against these attacks in the future. To decrypt this file, answer the couple of questions below.<br />
-<br />
-Thanks for protecting your company’s data!<br />
-        </Typography>
+
         </div>
         <Quiz />
 

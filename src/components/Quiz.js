@@ -15,12 +15,12 @@ import logo from '../img/aware.png'
 
 const data = [
   {
-    question: "Alexander just received an email from a John More, a name that he don't know. What should he do?",
+    question: "1. Alexander just received an email from a John More, a name that he don't know. What should he do?",
     answers: ['Not open any email from any strangers', 'Open the email, but not open any lnks', 'Open the email, but look on the url if it looks legitimate'],
     correct: 2
   },
   {
-    question: "Which of these links in email looks most un-safe",
+    question: "2. Which of these links in email looks most un-safe",
     answers: [
       'http://google.com/inbox/asdfkaerea/',
       'https://google.com/inbox/me/2311asaf',
@@ -125,6 +125,20 @@ class Quiz extends React.Component {
         <div style={{marginTop: 80}}>
           <Button variant='raised' color='primary' disabled={!this.state.correct} onClick={this.handleComplete}>Unlock my files</Button>
         </div>
+        {this.state.correct &&
+          <div>
+          <Typography variant='title' style={{marginBottom: 40, marginTop: 40}}>
+          Concratulations for completing the quiz.<br />
+          <br />
+          You could have set your company in danger by clicking on this email.<br />
+          <br />
+          You’re not alone - around 80 000 people fall victim to phishing scams every day globally.<br />
+          <br />
+          Thanks for learning more about protecting your company’s data!<br />
+          </Typography>
+
+          </div>
+        }
       </div>
     );
   }
