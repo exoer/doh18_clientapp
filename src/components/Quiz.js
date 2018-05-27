@@ -11,6 +11,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import {green} from '@material-ui/core/colors';
+import logo from '../img/aware.png'
 
 const data = [
   {
@@ -19,7 +20,7 @@ const data = [
     correct: 2
   },
   {
-    question: "Which of these links in email looks must un-safe",
+    question: "Which of these links in email looks most un-safe",
     answers: [
       'http://google.com/inbox/asdfkaerea/',
       'https://google.com/inbox/me/2311asaf',
@@ -106,18 +107,25 @@ class Quiz extends React.Component {
 
   render() {
     return (
-      <Grid container spacing={24}>
-        <Typography variant='subheading' paragraph>
-          Your files has been encrypted. To unlock your files you must answer the
-          tutorial on ransomware questions correctly.
-        </Typography>
+      <div>
+        <div style={{display: 'flex'}}>
+          <Typography variant='display1' paragraph>
+            Your files has been encrypted. To unlock your files you must answer the
+            tutorial on ransomware questions correctly.
+          </Typography>
+          {
+            // <div style={{paddingLeft: 40}}>
+            // <img src={logo} style={{height: 80}} />
+            // </div>
+          }
+        </div>
         {data.map((x, i) => {
           return <Question key={i} item={x} onChange={(value)=>this.handleChange(value, i)} />;
         })}
         <div style={{marginTop: 80}}>
           <Button variant='raised' color='primary' disabled={!this.state.correct} onClick={this.handleComplete}>Unlock my files</Button>
         </div>
-      </Grid>
+      </div>
     );
   }
 }
